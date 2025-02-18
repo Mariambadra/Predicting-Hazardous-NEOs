@@ -14,11 +14,6 @@
 - [Technical Implementation](#-technical-implementation)
 - [Results & Metrics](#-results--metrics)
 - [Deployment](#-deployment)
-- [Repository Structure](#-repository-structure)
-- [Getting Started](#-getting-started)
-- [Limitations & Future Work](#-limitations--future-work)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
