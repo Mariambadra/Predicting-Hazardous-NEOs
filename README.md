@@ -1,8 +1,12 @@
-# Near-Earth Objects (NEO) Hazard Prediction System
+# 🌍 Near-Earth Objects Hazard Prediction System
 
-![Project Banner](https://defence-industry-space.ec.europa.eu/sites/default/files/styles/oe_theme_full_width_banner_4_1/public/2023-08/NEO_HEADER%201602x530.png.webp?itok=rbmsPd05)  
-*Classifying potentially hazardous asteroids using machine learning*
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
+Machine learning system for classifying potentially hazardous asteroids using orbital characteristics and physical properties.
+
+![Workflow Diagram](https://via.placeholder.com/800x400?text=Data+Processing+and+Model+Workflow)
 
 ## 📋 Table of Contents
 - [Project Overview](#-project-overview)
@@ -80,19 +84,23 @@ X_res, y_res = smote.fit_resample(X_train, y_train)
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_res)
-Optimized Model Architecture
-python
-Copy
-RandomForestClassifier(
+```
+
+### Optimized Model Architecture
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(
     max_depth=10,
     min_samples_split=20,
     n_estimators=200,
     class_weight='balanced',
     random_state=42
 )
-Hyperparameter Search Space
-python
-Copy
+```
+
+### Hyperparameter Search Space
+```python
 param_grid = {
     'n_estimators': [100, 200, 300],
     'max_depth': [None, 10, 20, 30],
@@ -100,4 +108,28 @@ param_grid = {
     'max_features': ['sqrt', 'log2'],
     'class_weight': ['balanced', None]
 }
-📈 Results & Metrics
+```
+
+---
+
+## 📊 Results & Metrics
+
+### Performance Summary
+
+| Metric  | Value  | Description  |
+|---------|--------|-------------|
+| AUC-ROC | 0.9551 | Area Under ROC Curve |
+| F1 Score | 0.90 | Harmonic Mean of Precision/Recall |
+| Recall | 0.96 | Hazardous Class Detection Rate |
+| Precision | 0.84 | Hazardous Prediction Accuracy |
+
+### Confusion Matrix
+```
+               Predicted Safe  Predicted Hazardous
+Actual Safe         48,237             10,803
+Actual Hazard       2,438              56,526
+```
+---
+
+## 🚀 Deployment
+- Model is serialized using `joblib` for fast loading
