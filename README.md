@@ -6,7 +6,6 @@
 
 ![Project Banner](https://defence-industry-space.ec.europa.eu/sites/default/files/styles/oe_theme_full_width_banner_4_1/public/2023-08/NEO_HEADER%201602x530.png.webp?itok=rbmsPd05)  
 *Classifying potentially hazardous asteroids using machine learning*
-![Workflow Diagram](https://via.placeholder.com/800x400?text=Data+Processing+and+Model+Workflow)
 
 ## 📋 Table of Contents
 - [Project Overview](#-project-overview)
