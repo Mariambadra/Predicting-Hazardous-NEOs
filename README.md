@@ -3,38 +3,101 @@
 ![Project Banner](https://defence-industry-space.ec.europa.eu/sites/default/files/styles/oe_theme_full_width_banner_4_1/public/2023-08/NEO_HEADER%201602x530.png.webp?itok=rbmsPd05)  
 *Classifying potentially hazardous asteroids using machine learning*
 
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Dataset Description](#dataset-description)
-3. [Methodology](#methodology)
-4. [Technical Implementation](#technical-implementation)
-5. [Results & Interpretation](#results--interpretation)
-6. [Deployment](#deployment)
-7. [Repository Structure](#repository-structure)
-8. [Getting Started](#getting-started)
-9. [Limitations & Future Work](#limitations--future-work)
-10. [Contributing](#contributing)
+
+## 📋 Table of Contents
+- [Project Overview](#-project-overview)
+- [Dataset Description](#-dataset-description)
+- [Key Features](#-key-features)
+- [Technical Implementation](#-technical-implementation)
+- [Results & Metrics](#-results--metrics)
+- [Deployment](#-deployment)
+- [Repository Structure](#-repository-structure)
+- [Getting Started](#-getting-started)
+- [Limitations & Future Work](#-limitations--future-work)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
-## Project Overview
-**Objective**: Develop a binary classification system to predict asteroid hazard potential using orbital characteristics and physical properties.  
-**Significance**: Supports NASA's planetary defense initiatives by automating risk assessment of NEOs.  
-**Key Features**:
-- Handles severe class imbalance (17:1 hazardous:non-hazardous ratio)
-- Implements robust data leakage prevention
-- Achieves 95.5% AUC-ROC score
-- Deployable model for real-time predictions
+## 🚀 Project Overview
+
+**Objective**: Develop a binary classification system to predict asteroid hazard potential using NASA's NEO dataset  
+**Significance**: Supports planetary defense initiatives by automating risk assessment of near-Earth objects  
+**Key Challenges**:
+- Severe class imbalance (17:1 non-hazardous vs hazardous)
+- High-dimensional feature space
+- Physically meaningful feature engineering
 
 ---
 
-## Dataset Description
-### Source
-- **Original Dataset**: [NASA NEO Earth Close Approaches](https://cneos.jpl.nasa.gov/ca/)
-- **Time Range**: 1910-2024
-- **Size**: 338,171 observations
-- **Original Features**:
-  ```csv
-  neo_id, name, absolute_magnitude, estimated_diameter_min, 
-  estimated_diameter_max, relative_velocity, miss_distance, 
-  orbiting_body, is_hazardous
+## 📊 Dataset Description
+
+### Source Data
+- **Original Dataset**: [NASA CNEOS Close Approach Data](https://cneos.jpl.nasa.gov/ca/)
+- **Temporal Coverage**: 1910-2024
+- **Initial Size**: 338,171 observations
+- **License**: NASA Open Data Agreement
+
+### Final Feature Set
+| Feature | Description | Unit | Range |
+|---------|-------------|------|-------|
+| `absolute_magnitude` | Object's intrinsic brightness | mag | 10.3-32.6 |
+| `relative_velocity` | Approach speed | km/h | 1,380-152,700 |
+| `miss_distance` | Closest approach distance | km | 5,000-750M |
+| `is_hazardous` | Hazard classification | bool | 0/1 |
+
+---
+
+## 🔑 Key Features
+
+1. **Advanced Imbalance Handling**
+   - SMOTE oversampling (minority class)
+   - Class-weighted Random Forest
+   - Stratified k-fold validation
+
+2. **Feature Engineering**
+   - Removed collinear features (r=1.0)
+   - Standardized physical parameters
+   - Astrophysical domain validation
+
+3. **Production-Ready Pipeline**
+   - Model serialization with joblib
+   - Input validation constraints
+   - Comprehensive error handling
+
+---
+
+## ⚙️ Technical Implementation
+
+### Preprocessing Pipeline
+```python
+# Class Balancing
+from imblearn.over_sampling import SMOTE
+smote = SMOTE(random_state=42)
+X_res, y_res = smote.fit_resample(X_train, y_train)
+
+# Feature Scaling
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_res)
+Optimized Model Architecture
+python
+Copy
+RandomForestClassifier(
+    max_depth=10,
+    min_samples_split=20,
+    n_estimators=200,
+    class_weight='balanced',
+    random_state=42
+)
+Hyperparameter Search Space
+python
+Copy
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10, 20],
+    'max_features': ['sqrt', 'log2'],
+    'class_weight': ['balanced', None]
+}
+📈 Results & Metrics
