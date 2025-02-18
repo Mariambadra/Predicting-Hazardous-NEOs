@@ -4,8 +4,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
-Machine learning system for classifying potentially hazardous asteroids using orbital characteristics and physical properties.
-
+![Project Banner](https://defence-industry-space.ec.europa.eu/sites/default/files/styles/oe_theme_full_width_banner_4_1/public/2023-08/NEO_HEADER%201602x530.png.webp?itok=rbmsPd05)  
+*Classifying potentially hazardous asteroids using machine learning*
 ![Workflow Diagram](https://via.placeholder.com/800x400?text=Data+Processing+and+Model+Workflow)
 
 ## 📋 Table of Contents
