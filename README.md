@@ -1,6 +1,6 @@
 # Near-Earth Objects (NEO) Hazard Prediction System
 
-![Project Banner](https://via.placeholder.com/800x200?text=NEO+Hazard+Prediction+System)  
+![Project Banner](https://defence-industry-space.ec.europa.eu/sites/default/files/styles/oe_theme_full_width_banner_4_1/public/2023-08/NEO_HEADER%201602x530.png.webp?itok=rbmsPd05)  
 *Classifying potentially hazardous asteroids using machine learning*
 
 ## Table of Contents
