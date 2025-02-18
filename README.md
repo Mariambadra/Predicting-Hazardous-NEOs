@@ -77,25 +77,12 @@
 # Class Balancing
 from imblearn.over_sampling import SMOTE
 smote = SMOTE(random_state=42)
-X_res, y_res = smote.fit_resample(X_train, y_train)
+X_resampled, y_resampled = smote.fit_resample(X, y)
 
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_res)
-```
-
-### Optimized Model Architecture
-```python
-from sklearn.ensemble import RandomForestClassifier
-
-model = RandomForestClassifier(
-    max_depth=10,
-    min_samples_split=20,
-    n_estimators=200,
-    class_weight='balanced',
-    random_state=42
-)
+X_train_scaled = scaler.fit_transform(X_train)
 ```
 
 ### Hyperparameter Search Space
@@ -107,6 +94,17 @@ param_grid = {
     'max_features': ['sqrt', 'log2'],
     'class_weight': ['balanced', None]
 }
+random_search = RandomizedSearchCV(
+    estimator=rf_model,
+    param_distributions=param_grid,
+    n_iter=10,
+    cv=3,
+    scoring='recall',  
+    n_jobs=-1,
+    random_state=42
+)
+
+random_search.fit(X_train_scaled, y_train)
 ```
 
 ---
