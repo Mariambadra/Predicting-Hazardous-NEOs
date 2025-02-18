@@ -1,35 +1,40 @@
-# Near-Earth Objects Hazard Prediction
+# Near-Earth Objects (NEO) Hazard Prediction System
+
+![Project Banner](https://via.placeholder.com/800x200?text=NEO+Hazard+Prediction+System)  
+*Classifying potentially hazardous asteroids using machine learning*
+
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Dataset Description](#dataset-description)
+3. [Methodology](#methodology)
+4. [Technical Implementation](#technical-implementation)
+5. [Results & Interpretation](#results--interpretation)
+6. [Deployment](#deployment)
+7. [Repository Structure](#repository-structure)
+8. [Getting Started](#getting-started)
+9. [Limitations & Future Work](#limitations--future-work)
+10. [Contributing](#contributing)
+
+---
 
 ## Project Overview
-This project aims to predict whether Near-Earth Objects (NEOs) pose a potential hazard using NASA's dataset. The implementation includes data cleaning, exploratory analysis, preprocessing, and machine learning modeling using Random Forest Classifier.
+**Objective**: Develop a binary classification system to predict asteroid hazard potential using orbital characteristics and physical properties.  
+**Significance**: Supports NASA's planetary defense initiatives by automating risk assessment of NEOs.  
+**Key Features**:
+- Handles severe class imbalance (17:1 hazardous:non-hazardous ratio)
+- Implements robust data leakage prevention
+- Achieves 95.5% AUC-ROC score
+- Deployable model for real-time predictions
 
-## Dataset
-- Source: NASA NEO dataset (1910-2024)
-- Original Features: 
-  `neo_id`, `name`, `absolute_magnitude`, `estimated_diameter_min/max`, 
-  `relative_velocity`, `miss_distance`, `is_hazardous`
-- Cleaned Dataset: 338,171 entries
+---
 
-## Key Workflow Steps
-
-### 1. Data Cleaning
-- Removed 28 rows with missing values
-- Dropped redundant columns:
-  - `orbiting_body` (single unique value)
-  - `neo_id` & `name` (high cardinality)
-  - `estimated_diameter_min/max` (collinear with absolute_magnitude)
-
-### 2. Feature Engineering
-- Converted target variable: `is_hazardous` (bool → int)
-- Addressed class imbalance using SMOTE
-- Standardized features using StandardScaler
-
-### 3. Model Development
-```python
-# Final Model Architecture
-RandomForestClassifier(
-    max_depth=10,
-    min_samples_split=20,
-    class_weight='balanced',
-    random_state=42
-)
+## Dataset Description
+### Source
+- **Original Dataset**: [NASA NEO Earth Close Approaches](https://cneos.jpl.nasa.gov/ca/)
+- **Time Range**: 1910-2024
+- **Size**: 338,171 observations
+- **Original Features**:
+  ```csv
+  neo_id, name, absolute_magnitude, estimated_diameter_min, 
+  estimated_diameter_max, relative_velocity, miss_distance, 
+  orbiting_body, is_hazardous
